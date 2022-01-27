@@ -1,27 +1,23 @@
 #! /usr/bin/env python3
+import string
 
-import os
+def reverse_list(my_list):
+    my_list.reverse()
+    return my_list
 
-# Complete the solve function below.
-def solve(s):
-    s = list(s)
-    if s[0].isalpha():
-        s[0] = s[0].upper()
-    for i in range(len(s)):
-        if s[i] == ' ':
-            s[i+1] = s[i+1].upper()
-    s = ''.join(s)
-    return s
+def print_rangoli(size):
+    # your code goes here
+    alphabet = list(string.ascii_lowercase)
+    line_number = size*2 - 1
+    for i in range (line_number):
+        if i < size:
+            line = ''.join(reverse_list(alphabet[(size-i):(size)])) + alphabet[size-1-i] + ''.join(alphabet[(size-i):(size)])
+        else:
+            line = ''.join(reverse_list(alphabet[(i-size+2):(size)])) + alphabet[i-size+1] + ''.join(alphabet[(i-size+2):(size)])
+
+        joined_line = '-'.join(line)
+        print(joined_line.center(4*size-3,'-'))  # 2n-1 letters plus 2n-2 '-' characters
 
 if __name__ == '__main__':
-    # fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    s = input()
-
-    result = solve(s)
-
-    print(result)
-
-    # fptr.write(result + '\n')
-
-    # fptr.close()
+    n = int(input())
+    print_rangoli(n)
